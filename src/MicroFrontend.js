@@ -23,9 +23,10 @@ const MicroFrontend = ({ name, host, history, setError }) => {
     fetch(`${host}/asset-manifest.json`)
       //Lo transformamos a json
       .then((res) => {
+        console.log("Error: ", res.json);
         //Si la respuesta del servidor es "Ok" entonces regresaremos sus valores como un JSON para poder ser utilizados.
         if (res.ok) {
-          return res.json;
+          return res.json();
           //De lo contrario, regresaremos un error con la finalidad de realizar un "catch"
         } else {
           throw new Error("No se logró comunicar con el microfront");
@@ -33,6 +34,7 @@ const MicroFrontend = ({ name, host, history, setError }) => {
       })
       //Accedemos al manifiesto
       .then((manifest) => {
+        console.log("Manifiesto ", manifest)
         //Obtenemos todos aquellos elementos que tenga la key de "files" y los almacenamos en "promises"
         const promises = Object.keys(manifest["files"])
           .filter((key) => key.endsWith(".js")) //Los filtramos para solo seleccionar los elementos que tengan extensión 'js'
