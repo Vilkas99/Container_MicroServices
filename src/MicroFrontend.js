@@ -73,7 +73,7 @@ const MicroFrontend = ({ name, host, history, setError }) => {
     return () => {
       window[`unmount${name}`] && window[`unmount${name}`](`${name}-container`);
     };
-  }, [name, host, history]);
+  }, [name, host, history, setError]);
 
   return <main id={`${name}-container`} />;
 };
